@@ -2,16 +2,20 @@
   <div>
     <img alt="Vue logo" class="logo" src="./assets/buffalo.webp">
     <MedicalList msg="Awesome medical list brought to You by Vół" />
+    <!-- <DrugList msg="All your dailies brought to You also by Vół" /> -->
   </div>
 </template>
 
 <script>
 import MedicalList from "./components/MedicalList"
+// import DrugList from "./components/DrugList"
+
 
 export default {
   name: 'App',
   components: {
-    MedicalList
+    MedicalList, 
+    // DrugList
   }
 }
 </script>
