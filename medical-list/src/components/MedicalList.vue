@@ -4,9 +4,7 @@
   <ul>
     <li>All PATIENTS button shows data of all patients and all their medicine.</li>
     <li>FILTER 1 button shows all patients older than 30 and all their medicine.</li>
-    <li>FILTER 2 button shows all patients older than 83 and their medicals whose strenght is bigger than 8.</li>
-
-    
+    <li>FILTER 2 button shows all patients older than 83 and their medicals whose strenght is bigger than 8.</li>    
   </ul>
    <div class="button-container">
             <button v-on:click="patientFilterKey = 'all'"
@@ -28,7 +26,6 @@
                   <th>Gender</th>
                   <th>Medicine</th>            
                 </tr>
-
                 <tr v-for="(patient, index) in patientFilter " v-bind:key="patient " v-bind:patient="patient" class="patients-row">
                   <td class="patient-row">{{index}}</td>
                   <td class="patient-row">{{patient.name}}</td>
@@ -45,7 +42,6 @@
                       <th class="medicine-row">Form</th>
                       <th class="medicine-row">Expiry</th>        
                     </tr>
-
                     <tr v-for="(drug) in patient.medicine" v-bind:key="drug" v-bind:patient="drug">
                       <td>{{drug.medicationName}}</td>
                       <td>{{drug.unit}}</td>
