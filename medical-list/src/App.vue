@@ -30,6 +30,7 @@ export default {
   margin-top: 60px;
 }
 .logo {
+  margin-bottom: 40px;
 width: 200px;
 height: 150px;
 border-radius: 50%;

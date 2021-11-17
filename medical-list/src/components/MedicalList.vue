@@ -9,13 +9,18 @@
           <th>Age</th>
           <th>Gender</th>
           <div>
-            <button>show/hide</button>
-            <button>filter1</button>
-            <button>filter2</button>
+            <!-- <button>show/hide</button> -->
+            <button v-on:click="patientFilterKey = 'all'"
+                    :class="{ active: patientFilterKey == 'all' }">All patients</button>
+                    <button v-on:click="patientFilterKey = 'age'"
+                    :class="{ active: patientFilterKey == 'age' }">Patients over 30</button>
+                    <button v-on:click="patientFilterKey = 'ageStr'"
+                    :class="{ active: patientFilterKey == 'ageStr' }">Patients over 63 and Meds with str over 8</button>
+           
           </div>      
         </tr>
 
-        <tr v-for="(patient, index) in combined" v-bind:key="patient" v-bind:patient="patient" class="patients-row">
+        <tr v-for="(patient, index) in patientFilter " v-bind:key="patient " v-bind:patient="patient" class="patients-row">
           <td>{{index}}</td>
           <td>{{patient.name}}</td>
           <td>{{patient.lastName}}</td>
@@ -42,16 +47,7 @@
               <td>{{drug.expDate}}</td>
             </tr>
         </table>               
-      </tr>
-       <tr class="medicine-head">        
-        <th>Index</th>
-        <th>Medication name</th>
-        <th>Unit</th>
-        <th>Strenght</th>
-        <th>Form</th>
-        <th>Expiry date</th>
-        <th>Used by</th>
-      </tr>
+      </tr>  
     </table> 
 </template>
 
@@ -59,8 +55,9 @@
 export default {
   name: 'MedicalList', 
   data() {
-    return {     
-      combined: []
+    return {  
+      patientFilterKey: "all",   
+      patientsWithMeds: []
       }
   },
   async mounted() {
@@ -71,9 +68,9 @@ export default {
                 .then((value) => {
                   let patientList = value[0]
                   let drugList = value[1] 
-                  let combined = []
+                  let patientsWithMeds = []
                   
-                  this.combined = combined  
+                  this.patientsWithMeds = patientsWithMeds  
                   
     patientList.forEach((patient) => {
         let patientMeds = [];
@@ -82,14 +79,33 @@ export default {
             patientMeds.push(drug);
           }
         })
-        combined.push({ ...patient, medicine: patientMeds }); 
+        patientsWithMeds.push({ ...patient, medicine: patientMeds }); 
         patientMeds = [];   
     });
                 })
                 .catch((err) => {
                     console.log(err);
                 });
-      }
+      },
+        computed: {
+    patientFilter() {
+      return this[this.patientFilterKey]
+    },
+    all() {
+      return this.patientsWithMeds
+    },
+    age() {
+      return this.patientsWithMeds.filter((patient) => patient.age > 30)
+    },
+    ageStr() {
+      const ageFiltered = this.patientsWithMeds.filter((patient) => patient.age > 63)
+      return ageFiltered
+        .map((patient) => {
+            patient.medicine = patient.medicine.filter((drug) => drug.strength > 8);
+            return patient;
+        })  
+    }
+  }
     }
 </script>
 
@@ -115,6 +131,12 @@ th, td {
   border: 1px solid black;
   }
 
+  td {
+  vertical-align: top;
+    }
+.heading-text { 
+ /* text-shadow: 4px 4px 23px rgba(66, 68, 90, 1); */
+}
 .patients-head{
    width: 100%;
   height: 100%;
