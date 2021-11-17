@@ -1,7 +1,7 @@
 <template>
   <div>
     <img alt="Vue logo" class="logo" src="./assets/buffalo.webp">
-    <MedicalList msg="Awesome medical list brought to You by Vół" />
+    <MedicalList />
     <!-- <DrugList msg="All your dailies brought to You also by Vół" /> -->
   </div>
 </template>

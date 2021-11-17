@@ -12,7 +12,7 @@
         <th>Expiry date</th>
         
       </tr>
-      <tr v-for="(drug, index) in medicine" v-bind:key="drug" v-bind:drug="drug" class="medicine-row">
+      <tr v-for="(drug, index) in patientMeds" v-bind:key="drug" v-bind:drug="drug" class="medicine-row">
         <td>{{index}}</td>
         <td>{{drug.medicationName}}</td>
         <td>{{drug.unit}}</td>
@@ -29,7 +29,7 @@ export default {
   name: 'DrugList',
   props: {
     msg: String,
-    patientId: String
+    patientMeds: []
   },
   data() {
     return {
