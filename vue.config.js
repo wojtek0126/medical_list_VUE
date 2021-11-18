@@ -1,3 +1,1 @@
-module.exports = {
-    publicPath: '/medical_list_VUE/'
-}
+module.exports = { publicPath: process.env.NODE_ENV === 'production' ? '/medical_list_VUE/' : '/' }
