@@ -12,6 +12,6 @@ git add -A
 
 git commit -m 'deploy'
 
-git push -f git@github.com:wojtek0126/medical_list_VUE.git main:gh-pages
+git push -f git@github.com:wojtek0126/medical_list_VUE.git master:gh-pages
 
 cd -
