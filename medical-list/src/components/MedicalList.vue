@@ -26,14 +26,14 @@
                   <th>Gender</th>
                   <th>Medicine</th>            
                 </tr>
-                <tr v-for="(patient, index) in patientFilter " v-bind:key="patient " v-bind:patient="patient" class="patients-row">
-                  <td class="patient-row">{{index}}</td>
-                  <td class="patient-row">{{patient.name}}</td>
-                  <td class="patient-row">{{patient.lastName}}</td>
-                  <td class="patient-row">{{patient.adress}}</td>
-                  <td class="patient-row">{{patient.phoneNumber}}</td>
-                  <td class="patient-row">{{patient.age}}</td>
-                  <td class="patient-row">{{patient.gender}}</td>  
+                <tr v-for="(patient, index) in patientFilter " v-bind:key="patient " v-bind:patient="patient">
+                  <td>{{index}}</td>
+                  <td>{{patient.name}}</td>
+                  <td>{{patient.lastName}}</td>
+                  <td>{{patient.adress}}</td>
+                  <td>{{patient.phoneNumber}}</td>
+                  <td>{{patient.age}}</td>
+                  <td>{{patient.gender}}</td>  
                   <table>
                     <tr class="medicine-head">
                       <th class="medicine-row">Med name</th>
