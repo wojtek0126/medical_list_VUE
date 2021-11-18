@@ -2,9 +2,9 @@
 <div class="main-container">
   <h1>List of patients and their medicine</h1>
   <ul>
-    <li>All PATIENTS button shows data of all patients and all their medicine.</li>
-    <li>FILTER 1 button shows all patients older than 30 and all their medicine.</li>
-    <li>FILTER 2 button shows all patients older than 83 and their medicals whose strength is bigger than 8.</li>    
+    <li>All PATIENTS button shows data of all patients and all of their medicine.</li>
+    <li>FILTER 1 button shows all patients older than 30 and all of their medicine.</li>
+    <li>FILTER 2 button shows all patients older than 83 and their medicals with strength bigger than 8.</li>    
   </ul>
    <div class="button-container">
             <button v-on:click="patientFilterKey = 'all'"
@@ -36,7 +36,7 @@
                   <td class="patient-row">{{patient.gender}}</td>  
                   <table>
                     <tr class="medicine-head">
-                      <th class="medicine-row">Medication</th>
+                      <th class="medicine-row">Med name</th>
                       <th class="medicine-row">Unit</th>
                       <th class="medicine-row">Strength</th>
                       <th class="medicine-row">Form</th>
@@ -127,7 +127,6 @@ html {
 body {
   width: 750px;
   margin: 0 auto;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 table {
