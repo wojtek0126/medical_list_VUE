@@ -1,10 +1,10 @@
 <template>
 <div class="main-container">
-  <h1>Patient's medicine list</h1>
+  <h1>List of patients and their medicine</h1>
   <ul>
     <li>All PATIENTS button shows data of all patients and all their medicine.</li>
     <li>FILTER 1 button shows all patients older than 30 and all their medicine.</li>
-    <li>FILTER 2 button shows all patients older than 83 and their medicals whose strenght is bigger than 8.</li>    
+    <li>FILTER 2 button shows all patients older than 83 and their medicals whose strength is bigger than 8.</li>    
   </ul>
    <div class="button-container">
             <button v-on:click="patientFilterKey = 'all'"
@@ -38,7 +38,7 @@
                     <tr class="medicine-head">
                       <th class="medicine-row">Medication</th>
                       <th class="medicine-row">Unit</th>
-                      <th class="medicine-row">Strenght</th>
+                      <th class="medicine-row">Strength</th>
                       <th class="medicine-row">Form</th>
                       <th class="medicine-row">Expiry</th>        
                     </tr>
