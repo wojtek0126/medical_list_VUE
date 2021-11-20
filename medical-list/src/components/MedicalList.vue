@@ -15,28 +15,16 @@
                     :class="{ active: patientFilterKey == 'ageStr' }" class="button">Filter 2</button>           
           </div> 
           <div class="table-container">
-            <div class="table-patient">      
-                <!-- <tr class="patients-head">        
-                  <th>Index</th>
-                  <th>Name</th>
-                  <th>Surname</th>
-                  <th class="patients-address">Address</th>
-                  <th>Phone</th>
-                  <th>Age</th>
-                  <th>Gender</th>
-                  <th>Medicine</th>            
-                </tr> -->
+            <div class="table-patient">                 
                 <div v-for="(patient, index) in patientFilter " v-bind:key="patient " v-bind:patient="patient" class="patient-data">
-                  <div class="patient-details__head">Patient#{{index}}</div>
-                  <div class="patient-details__container">
-                    <!-- <div><span></div> -->
-                    <div><span>Name </span><p>{{patient.name}} {{patient.lastName}}</p></div>
-                    <!-- <div>{{patient.lastName}}</div> -->
-                    <div><span>Address </span><p>{{patient.adress}}</p></div>
-                    <div><span>Phone </span><p>{{patient.phoneNumber}}</p></div>
-                    <div><span>Age </span><p>{{patient.age}}</p></div>
-                    <div><span>Gender </span><p>{{patient.gender}}</p></div>  
-                  </div>
+                  <div class="patient-details__head">Patient number {{index + 1}}</div>
+                  <table class="patient-details__container">
+                    <tr><th>Name </th><td>{{patient.name}} {{patient.lastName}}</td></tr>
+                   <tr><th>Address </th><td>{{patient.adress}}</td></tr>
+                    <tr><th>Phone </th><td>{{patient.phoneNumber}}</td></tr>
+                     <tr><th>Age </th><td>{{patient.age}}</td></tr>
+                     <tr><th>Gender </th><td>{{patient.gender}}</td></tr> 
+                  </table>
                   <table>
                     <tr class="medicine-head" ref="setItemRef">
                       <th class="medicine-row">Med name</th>
@@ -150,7 +138,6 @@ body {
 table {
   width: 100%;
   max-width: 100%;
-  /* border: 1px solid black; */
   border-spacing: 0
 }
 
@@ -162,6 +149,8 @@ th, td {
   td {
   vertical-align: top;
   font-size: 10px;
+  background-color: #fff;
+
     }
 
   h1 {
@@ -218,59 +207,31 @@ th, td {
 .button:focus {
     color: #f9b907;
   }
-/* .patients-head{
-  width: 100%;
-  height: 100%;
-  background-color: #1d5eb1; 
-  color: #fff;
-  font-weight: 700;
-  line-height: normal;
-  text-transform: uppercase; 
-  font-size: 0.9vw
-} */
 .patient-details__head {
   background-color: #1d5eb1; 
   color: #fff;
   text-transform: uppercase; 
+  font-size: 10px;
   font-weight: 700;
-  border-bottom: 1px solid #000;
   padding: 5px;
-
 }
-
-.patient-details__container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
 .patient-details__container div{
-  display: flex;
-  align-items: center;
   width: 100%;
-  border-bottom: 1px solid;
 }
-.patient-details__container span{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.patient-details__container th{  
   text-transform: uppercase;
   background-color: #1d5eb1;
-  color: #fff;
-  padding: 5px;
-  width: 80px;
-  /* border: 1px solid #000;  */
-  margin-right: 5px;
+  color: #fff;  
   font-size: 10px;
   font-weight: 700;
+  width: 63px;
 }
-
-.patient-details__container p {
+.patient-details__container td {
   margin: 0;
   font-size: 10px;
+  text-align: initial;
 }
 .patient-data {
-  /* border: 1px solid #000; */
   margin-bottom: 20px;
 }
 .medicine-head{
@@ -284,31 +245,4 @@ th, td {
   text-transform: uppercase;
   font-size: 10px;
 }
-
-/* .patients-address {
-  width: 24%
-} */
-
-@media only screen and (max-width: 800px) {
-  td {
-  font-size: 10px;
-   }
-   .patient-details__container span{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  background-color: #1d5eb1;
-  color: #fff;
-  padding: 5px;
-  width: 80px;
-  /* border: 1px solid #000;  */
-  margin-right: 5px;
-  font-size: 10px;
-  font-weight: 700;
-  height: 11px;
-}
-
-}
-
 </style>
