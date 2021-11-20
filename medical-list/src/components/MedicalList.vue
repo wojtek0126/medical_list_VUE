@@ -4,7 +4,7 @@
   <ul>
     <li>All PATIENTS button shows data of all patients and all of their medicine.</li>
     <li>FILTER 1 button shows all patients older than 30 and all of their medicine.</li>
-    <li>FILTER 2 button shows all patients older than 83 and their medicals with strength bigger than 8.</li>    
+    <li>FILTER 2 button shows all patients older than 63 and their medicals with strength bigger than 8.</li>    
   </ul>
    <div class="button-container">
             <button v-on:click="patientFilterKey = 'all'"
@@ -15,8 +15,8 @@
                     :class="{ active: patientFilterKey == 'ageStr' }" class="button">Filter 2</button>           
           </div> 
           <div class="table-container">
-            <table>      
-                <tr class="patients-head">        
+            <div class="table-patient">      
+                <!-- <tr class="patients-head">        
                   <th>Index</th>
                   <th>Name</th>
                   <th>Surname</th>
@@ -25,24 +25,27 @@
                   <th>Age</th>
                   <th>Gender</th>
                   <th>Medicine</th>            
-                </tr>
-                <tr v-for="(patient, index) in patientFilter " v-bind:key="patient " v-bind:patient="patient">
-                  <td>{{index}}</td>
-                  <td>{{patient.name}}</td>
-                  <td>{{patient.lastName}}</td>
-                  <td>{{patient.adress}}</td>
-                  <td>{{patient.phoneNumber}}</td>
-                  <td>{{patient.age}}</td>
-                  <td>{{patient.gender}}</td>  
+                </tr> -->
+                <div v-for="(patient, index) in patientFilter " v-bind:key="patient " v-bind:patient="patient" class="patient-data">
+                  <div class="patient-details__head">Patient#{{index}}</div>
+                  <div class="patient-details__container">
+                    <!-- <div><span></div> -->
+                    <div><span>Name </span><p>{{patient.name}} {{patient.lastName}}</p></div>
+                    <!-- <div>{{patient.lastName}}</div> -->
+                    <div><span>Address </span><p>{{patient.adress}}</p></div>
+                    <div><span>Phone </span><p>{{patient.phoneNumber}}</p></div>
+                    <div><span>Age </span><p>{{patient.age}}</p></div>
+                    <div><span>Gender </span><p>{{patient.gender}}</p></div>  
+                  </div>
                   <table>
-                    <tr class="medicine-head">
+                    <tr class="medicine-head" ref="setItemRef">
                       <th class="medicine-row">Med name</th>
                       <th class="medicine-row">Unit</th>
                       <th class="medicine-row">Strength</th>
                       <th class="medicine-row">Form</th>
                       <th class="medicine-row">Expiry</th>        
                     </tr>
-                    <tr v-for="(drug) in patient.medicine" v-bind:key="drug" v-bind:patient="drug">
+                    <tr v-for="(drug) in patient.medicine" v-bind:key="drug" v-bind:patient="drug" >
                       <td>{{drug.medicationName}}</td>
                       <td>{{drug.unit}}</td>
                       <td>{{drug.strength}}</td>
@@ -50,8 +53,8 @@
                       <td>{{drug.expDate}}</td>
                     </tr>
                 </table>               
-              </tr>     
-            </table> 
+              </div>     
+            </div> 
     </div>
 </div>    
 </template>
@@ -63,7 +66,8 @@ export default {
     return {  
       patientFilterKey: "all",   
       patientsWithMeds: [],
-      unMutatedPatientsMeds: []
+      unMutatedPatientsMeds: [],
+      itemRefs: []
       }
   },
   async mounted() {
@@ -96,9 +100,23 @@ export default {
                     console.log(err);
                 });
       },
+      methods: {
+    setItemRef(el) {
+      if (el) {
+        this.itemRefs.push(el)
+      }
+    }
+  },
+  beforeUpdate() {
+    this.itemRefs = []
+  },
+  updated() {
+    console.log(this.itemRefs)
+  },
+    
         computed: {
     patientFilter() {
-      return this[this.patientFilterKey];
+      return this[this.patientFilterKey];      
     },
     all() {
       return this.unMutatedPatientsMeds;
@@ -106,15 +124,15 @@ export default {
     age() {
       return this.unMutatedPatientsMeds.filter((patient) => patient.age > 30);
     },
-    ageStr() {
-      const ageFiltered = this.patientsWithMeds.filter((patient) => patient.age > 63);
+    ageStr() {    
+      const ageFiltered = this.patientsWithMeds.filter((patient) => patient.age > 63);      
       return ageFiltered
         .map((patient) => {
             patient.medicine = patient.medicine.filter((drug) => drug.strength > 8);
             return patient;
         })  
     }
-  }
+  } 
     }
 </script>
 
@@ -132,7 +150,7 @@ body {
 table {
   width: 100%;
   max-width: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-spacing: 0
 }
 
@@ -143,6 +161,7 @@ th, td {
 
   td {
   vertical-align: top;
+  font-size: 10px;
     }
 
   h1 {
@@ -172,7 +191,7 @@ th, td {
 
     li:nth-child(3) {
      color: #f9b907;
-     }
+     }    
 .main-container {
       background-color: #f2f2f2;
 }
@@ -199,7 +218,7 @@ th, td {
 .button:focus {
     color: #f9b907;
   }
-.patients-head{
+/* .patients-head{
   width: 100%;
   height: 100%;
   background-color: #1d5eb1; 
@@ -208,6 +227,51 @@ th, td {
   line-height: normal;
   text-transform: uppercase; 
   font-size: 0.9vw
+} */
+.patient-details__head {
+  background-color: #1d5eb1; 
+  color: #fff;
+  text-transform: uppercase; 
+  font-weight: 700;
+  border-bottom: 1px solid #000;
+  padding: 5px;
+
+}
+
+.patient-details__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.patient-details__container div{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid;
+}
+.patient-details__container span{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  background-color: #1d5eb1;
+  color: #fff;
+  padding: 5px;
+  width: 80px;
+  /* border: 1px solid #000;  */
+  margin-right: 5px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.patient-details__container p {
+  margin: 0;
+  font-size: 10px;
+}
+.patient-data {
+  /* border: 1px solid #000; */
+  margin-bottom: 20px;
 }
 .medicine-head{
    width: 100%;
@@ -218,10 +282,33 @@ th, td {
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
-  font-size: 0.7vw
+  font-size: 10px;
 }
 
-.patients-address {
+/* .patients-address {
   width: 24%
+} */
+
+@media only screen and (max-width: 800px) {
+  td {
+  font-size: 10px;
+   }
+   .patient-details__container span{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  background-color: #1d5eb1;
+  color: #fff;
+  padding: 5px;
+  width: 80px;
+  /* border: 1px solid #000;  */
+  margin-right: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  height: 11px;
 }
+
+}
+
 </style>
