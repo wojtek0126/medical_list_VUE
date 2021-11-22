@@ -116,8 +116,8 @@ export default {
       const ageFiltered = this.patientsWithMeds.filter((patient) => patient.age > 63);      
       return ageFiltered
         .map((patient) => {
-            patient.medicine = patient.medicine.filter((drug) => drug.strength > 8);
-            return patient;
+            const filteredMedicines = patient.medicine.filter((drug) => drug.strength > 8);
+            return {...patient, medicine: filteredMedicines};
         })  
     }
   } 
